@@ -4,38 +4,43 @@ import { useEffect, useState } from "react";
 import Blockfunds from "./contracts/Blockfunds.json";
 import Causes from "./contracts/Causes.json";
 import Donors from "./contracts/Donors.json";
+import { Toaster, toast } from "react-hot-toast";
 
 const blockfundsAbi = Blockfunds.abi;
 const causesAbi = Causes.abi;
 const DonorsAbi = Donors.abi;
-const blockfundsAddress = "0x30df32894692b8e1E3e0E2Cd22893a99c60f6F81";
-const causesAddress = "0xfa255a104D97A5862156D02AFaBBF0c08fE88527";
-const donorsAddress = "0x921b82afeBf78EE8EcEB3000a6656Bfe39519c0E";
+const blockfundsAddress = "0x3f69B315b2a4d3CC93786Ab73f88F13B32Afe04E";
+const causesAddress = "0xB2B9809d5D60D1CA6d8625ec65E89993A347B385";
+const donorsAddress = "0x5Dd31a6A90f6A209AE969e4aBae2Dd1a7e1C6AB5";
 
 function App() {
   const [account, setAccount] = useState("");
   const [donors, setDonors] = useState({});
   const [causes, setCauses] = useState({});
   const [blockfunds, setBlockfunds] = useState({});
-  const cause_id = [1, 2, 3, 4, 5, 6];
-  const cause_name = ["a", "b", "c", "d", "e", "f"];
-  const cause_collected_amount = [233, 232, 11, 33, 55, 53];
-  const cause_target_amount = [3322, 55331, 32, 32, 33, 55];
+  const [cause_id, setCauseID] = useState([]);
+  const [cause_name, setCauseName] = useState(["a", "b", "c", "d", "e", "f"]);
+  const [cause_collected_amount, setCauseCollectedAmount] = useState([
+    233, 232, 11, 33, 55, 53,
+  ]);
+  const [cause_target_amount, setCauseTargetAmount] = useState([
+    3322, 55331, 32, 32, 33, 55,
+  ]);
 
   const handleAddDonorsAddress = async (e) => {
     e.preventDefault();
     const resp = await blockfunds.methods
       .setDonorsAddress(e.target[0].value)
-      .send({ from: account, gas: 3000000 });
-
+      .send({ from: account });
+    toast.success("Address Added");
     console.log("Resp", resp);
   };
   const handleAddCausesAddress = async (e) => {
     e.preventDefault();
     const resp = await blockfunds.methods
       .setCausesAddress(e.target[0].value)
-      .send({ from: account, gas: 3000000 });
-
+      .send({ from: account });
+    toast.success("Address Added");
     console.log("Resp", resp);
   };
   const handleAddBlockfundsAddress = async (e) => {
@@ -46,7 +51,7 @@ function App() {
     resp = await causes.methods
       .setBlockfundsAddress(e.target[0].value)
       .send({ from: account });
-
+    toast.success("Address Added");
     console.log("Resp", resp);
   };
   const handleDonate = async (e) => {
@@ -66,6 +71,15 @@ function App() {
         from: e.target["donor_address"].value,
         value: form["amount"].value,
       });
+    let c = await causes.methods.getCauses().call();
+    setCauseID(c[0]);
+    setCauseName(c[1]);
+    setCauseCollectedAmount(c[2]);
+    setCauseTargetAmount(c[3]);
+    console.log("All Causes", c);
+    console.log("Resp", resp);
+
+    toast.success("Donation Made");
     console.log("Resp", resp);
   };
   const handleAddCause = async (e) => {
@@ -78,7 +92,14 @@ function App() {
         e.target["time_threshold"].value
       )
       .send({ from: account, gas: 3000000 });
+    let c = await causes.methods.getCauses().call();
+    setCauseID(c[0]);
+    setCauseName(c[1]);
+    setCauseCollectedAmount(c[2]);
+    setCauseTargetAmount(c[3]);
+    console.log("All Causes", c);
     console.log("Resp", resp);
+    toast.success("Cause Added");
   };
   useEffect(() => {
     const loadBlockchainData = async () => {
@@ -95,6 +116,7 @@ function App() {
       setDonors(donorsContract);
       setCauses(causesContract);
       setAccount(accounts[0]);
+      toast.success("Data Loaded");
     };
     loadBlockchainData();
   }, []);
@@ -104,6 +126,7 @@ function App() {
   return (
     <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
       <div>
+        <Toaster></Toaster>
         <div className="m-4 credit-card w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
           <div className="mt-4 p-4">
             <h1 className="text-xl font-semibold text-gray-700 text-center">
