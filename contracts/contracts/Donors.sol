@@ -208,5 +208,17 @@ contract Donors {
         return num_objections;
     }
 
-    function forceRefund() public {}
+    // Forces the causes contract to refund the donors for the given cause
+    function forceRefund(uint256 cause_id) public {
+        (bool success, bytes memory result) = blockfunds_address.call(
+            abi.encodeWithSignature("getCausesAddress()")
+        );
+        require(success, "Blockfunds could not be invoked.");
+        address causes_address = abi.decode(result, (address));
+
+        (success, result) = causes_address.call(
+            abi.encodeWithSignature("withdrawDonations(uint256)", cause_id)
+        );
+        require(success, "The refund could not be processed.");
+    }
 }

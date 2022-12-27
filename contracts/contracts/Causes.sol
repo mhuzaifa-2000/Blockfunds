@@ -118,7 +118,7 @@ contract Causes {
         causes[cause_id].collected_amount += (msg.value / 1 ether);
     }
 
-    function withrawDonations(uint256 cause_id) public {
+    function withdrawDonations(uint256 cause_id) public {
         // The cause must currently be active
         require(causes[cause_id].status == true, "This cause is not active.");
 
@@ -168,7 +168,9 @@ contract Causes {
                 address payable payable_donor_address = payable(
                     donor_addresses[i]
                 );
-                payable_donor_address.transfer(donor_donated_amounts[i]);
+                payable_donor_address.transfer(
+                    donor_donated_amounts[i] * 1 ether
+                );
             }
 
             // Reset the data for the cause
@@ -182,7 +184,7 @@ contract Causes {
 
             // Transfer the donations to the activist's address
             causes[cause_id].activist_address.transfer(
-                causes[cause_id].collected_amount
+                causes[cause_id].collected_amount * 1 ether
             );
 
             // Reset the data for the cause
