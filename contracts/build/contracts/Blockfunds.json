@@ -845,7 +845,7 @@
   "sourceMap": "61:901:0:-:0;;;360:51;;;;;;;;;;393:10;385:5;;:18;;;;;;;;;;;;;;;;;;61:901;;;;;;",
   "deployedSourceMap": "61:901:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;851:108;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;735;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;577:150;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;419;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;851:108;901:7;928:23;;;;;;;;;;;921:30;;851:108;:::o;735:::-;785:7;812:23;;;;;;;;;;;805:30;;735:108;:::o;577:150::-;665:5;;;;;;;;;;651:19;;:10;:19;;;643:28;;;;;;708:11;682:23;;:37;;;;;;;;;;;;;;;;;;577:150;:::o;419:::-;507:5;;;;;;;;;;493:19;;:10;:19;;;485:28;;;;;;550:11;524:23;;:37;;;;;;;;;;;;;;;;;;419:150;:::o;7:126:3:-;44:7;84:42;77:5;73:54;62:65;;7:126;;;:::o;139:96::-;176:7;205:24;223:5;205:24;:::i;:::-;194:35;;139:96;;;:::o;241:118::-;328:24;346:5;328:24;:::i;:::-;323:3;316:37;241:118;;:::o;365:222::-;458:4;496:2;485:9;481:18;473:26;;509:71;577:1;566:9;562:17;553:6;509:71;:::i;:::-;365:222;;;;:::o;674:117::-;783:1;780;773:12;920:122;993:24;1011:5;993:24;:::i;:::-;986:5;983:35;973:63;;1032:1;1029;1022:12;973:63;920:122;:::o;1048:139::-;1094:5;1132:6;1119:20;1110:29;;1148:33;1175:5;1148:33;:::i;:::-;1048:139;;;;:::o;1193:329::-;1252:6;1301:2;1289:9;1280:7;1276:23;1272:32;1269:119;;;1307:79;;:::i;:::-;1269:119;1427:1;1452:53;1497:7;1488:6;1477:9;1473:22;1452:53;:::i;:::-;1442:63;;1398:117;1193:329;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.17;\r\n\r\ncontract Blockfunds {\r\n    // ************************ STATE VARIABLES ************************ //\r\n\r\n    address owner;\r\n\r\n    address contract_donors_address;\r\n    address contract_causes_address;\r\n\r\n    // ************************ FUNCTIONS ************************ //\r\n\r\n    // Constructor\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    function setContractDonors(address donors_addr) public {\r\n        require(msg.sender == owner);\r\n        contract_donors_address = donors_addr;\r\n    }\r\n\r\n    function setContractCauses(address causes_addr) public {\r\n        require(msg.sender == owner);\r\n        contract_causes_address = causes_addr;\r\n    }\r\n\r\n    function getContractDonors() public view returns (address) {\r\n        return contract_donors_address;\r\n    }\r\n\r\n    function getContractCauses() public view returns (address) {\r\n        return contract_causes_address;\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\zohai\\Desktop\\Project\\contracts\\contracts\\Blockfunds.sol",
+  "sourcePath": "C:\\Users\\zohai\\Desktop\\Blockfunds\\contracts\\contracts\\Blockfunds.sol",
   "ast": {
     "absolutePath": "project:/contracts/Blockfunds.sol",
     "exportedSymbols": {
@@ -1657,7 +1657,7 @@
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-16T11:07:11.573Z",
+  "updatedAt": "2022-12-26T17:25:39.150Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

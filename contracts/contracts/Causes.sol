@@ -119,19 +119,19 @@ contract Causes {
     }
 
     function withrawDonations(uint256 cause_id) public {
+        // The cause must currently be active
+        require(causes[cause_id].status == true, "This cause is not active.");
+
         // Check whether more than 2/3 objections have been raised
         (bool success, bytes memory result) = blockfunds_address.call(
-            abi.encodeWithSignature("getContractCauses()")
+            abi.encodeWithSignature("getDonorsAddress()")
         );
 
         address donors_address = abi.decode(result, (address));
 
         // Get the number of donors
         (success, result) = donors_address.call(
-            abi.encodeWithSignature(
-                "function getNumberOfDonors(uint256)",
-                cause_id
-            )
+            abi.encodeWithSignature("getNumberOfDonors(uint256)", cause_id)
         );
 
         uint256 num_donors = abi.decode(result, (uint256));
@@ -139,21 +139,45 @@ contract Causes {
 
         // Get the number of objections
         (success, result) = donors_address.call(
-            abi.encodeWithSignature(
-                "function getNumberOfObjections(uint256)",
-                cause_id
-            )
+            abi.encodeWithSignature("getNumberOfObjections(uint256)", cause_id)
         );
 
         uint256 num_objections = abi.decode(result, (uint256));
 
         // Refund the donations if more than 2/3 objections have been raised
         if (num_objections > two_thirds) {
-            // Refund
+            address[] memory donor_addresses;
+            uint256[] memory donor_donated_amounts;
+
+            // Get the amount that has to be refunded to each donor
+            (success, result) = donors_address.call(
+                abi.encodeWithSignature("getDonorAddresses(uint256)", cause_id)
+            );
+            donor_addresses = abi.decode(result, (address[]));
+
+            (success, result) = donors_address.call(
+                abi.encodeWithSignature(
+                    "getDonorDonatedAmounts(uint256)",
+                    cause_id
+                )
+            );
+            donor_donated_amounts = abi.decode(result, (uint256[]));
+
+            // Transfer the refund
+            for (uint256 i = 0; i < num_donors; i++) {
+                address payable payable_donor_address = payable(
+                    donor_addresses[i]
+                );
+                payable_donor_address.transfer(donor_donated_amounts[i]);
+            }
+
+            // Reset the data for the cause
+            causes[cause_id].status = false;
+            causes[cause_id].collected_amount = 0;
         } else {
             require(
                 block.number > causes[cause_id].donation_period,
-                "You cannot withdraw the donations until the donation period ends."
+                "The donations cannot be withdrawn until the donation period ends."
             );
 
             // Transfer the donations to the activist's address
@@ -161,7 +185,9 @@ contract Causes {
                 causes[cause_id].collected_amount
             );
 
+            // Reset the data for the cause
             causes[cause_id].status = false;
+            causes[cause_id].collected_amount = 0;
         }
     }
 }
