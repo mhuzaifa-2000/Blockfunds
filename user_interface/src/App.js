@@ -1,11 +1,22 @@
-import logo from "./logo.svg";
 import "./App.css";
-
+import Web3 from "web3";
+import { useEffect, useState } from "react";
 function App() {
+  const [account, setAccount] = useState("");
+
   const cause_id = [1, 2, 3, 4, 5, 6];
   const cause_name = ["a", "b", "c", "d", "e", "f"];
   const cause_collected_amount = [233, 232, 11, 33, 55, 53];
   const cause_target_amount = [3322, 55331, 32, 32, 33, 55];
+  useEffect(() => {
+    const loadBlockchainData = async () => {
+      const web3 = new Web3("http://localhost:7545");
+      const accounts = await web3.eth.getAccounts();
+      console.log(accounts);
+      setAccount(accounts[0]);
+    };
+    loadBlockchainData();
+  }, []);
   return (
     <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
       <div>
@@ -13,7 +24,7 @@ function App() {
         <div className="m-4 credit-card w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
           <div className="mt-4 p-4">
             <h1 className="text-xl font-semibold text-gray-700 text-center">
-              Donate
+              Donate {account}
             </h1>
 
             <form
@@ -22,7 +33,7 @@ function App() {
               <div className="my-3">
                 <input
                   type="number"
-                  name="recipient"
+                  name="donor_id"
                   className="h-12 pl-2 border-gray-300 rounded-lg border-2  w-full "
                   placeholder="Donor ID"
                 />
@@ -30,7 +41,7 @@ function App() {
               <div className="my-3">
                 <input
                   type="number"
-                  name="amount"
+                  name="cause_id"
                   className="h-12 pl-2 border-gray-300 rounded-lg border-2  w-full "
                   placeholder="Cause ID"
                 />
