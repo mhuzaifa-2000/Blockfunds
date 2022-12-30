@@ -43,8 +43,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -57,8 +56,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"getCausesAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDonorsAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"causes_addr\",\"type\":\"address\"}],\"name\":\"setCausesAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"donors_addr\",\"type\":\"address\"}],\"name\":\"setDonorsAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Blockfunds.sol\":\"Blockfunds\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Blockfunds.sol\":{\"keccak256\":\"0x3bcf45eda4aa1417dc035e8bd80e55e84f9062344509b952d5bcf279446ec366\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7b14ee84d519c75a5348d140050ce1074ddd64edaddc70e0e1fb84f1dd715cdd\",\"dweb:/ipfs/QmUoy3ivcWghkCU4oFqafZAEwW4BuqBUKwPhfEGP8YNv5W\"]}},\"version\":1}",
@@ -1650,26 +1648,9 @@
     "name": "solc",
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
-  "networks": {
-    "5999": {
-      "events": {},
-      "links": {},
-<<<<<<< HEAD
-      "address": "0x2e27437A39EA0F0952e6401ABf91A158D71c4a56",
-      "transactionHash": "0x39b077d005a9f194cef186a275730885f4acf622138a5200da93a95d25878af9"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-27T05:23:57.430Z",
-=======
-      "address": "0x3f69B315b2a4d3CC93786Ab73f88F13B32Afe04E",
-      "transactionHash": "0xbff7fc5a727a1f579053f2b0d16f40f44fb7e2fa264b2a8e34043069f0aa19f8"
-    }
-  },
-  "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-27T05:00:12.746Z",
->>>>>>> fe9c23b14e89cd91b3acc248e51a13c4dcac8f4c
-  "networkType": "ethereum",
+  "updatedAt": "2022-12-27T04:58:24.125Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

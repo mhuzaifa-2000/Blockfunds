@@ -73,8 +73,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -87,8 +86,7 @@
       "name": "receiveDonation",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -20527,26 +20525,9 @@
     "name": "solc",
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
-  "networks": {
-    "5999": {
-      "events": {},
-      "links": {},
-<<<<<<< HEAD
-      "address": "0xf5126638b61e5BEc96972171a3A8726Fb9f85dd2",
-      "transactionHash": "0x41b543413ef71e748f834b796e3cd90f85f7f9cf8452b76a786e64e08a20ed07"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-27T05:24:00.598Z",
-=======
-      "address": "0xB2B9809d5D60D1CA6d8625ec65E89993A347B385",
-      "transactionHash": "0x25ba19dc4edf9660c2204d9e87f5a6e804374962f32e69f28871649acd1e9dc0"
-    }
-  },
-  "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-27T05:00:16.518Z",
->>>>>>> fe9c23b14e89cd91b3acc248e51a13c4dcac8f4c
-  "networkType": "ethereum",
+  "updatedAt": "2022-12-27T04:58:24.161Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
